@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>Chatアプリ</title>
+<link rel="stylesheet" href="./chat.css">
+</head>
+<body>
+
+<!-- コンテンツ表示画面 -->
+<main>
+    <div id="top">チャットグループ</div>
+    <div id="output">
+        <ul id="message">👩：こんにちわ</ul>
+        <ul id="message_r"></ul>
+    </div>
+    <div id="under">
+        <textarea name="" id="text" cols="30" rows="10"></textarea>
+        <div id="name">
+            名前: <input type="text" id="uname">
+            <button id="send">送信</button>
+            <button id="delete">削除</button>
+        </div>
+    </div>
+</main>
+
+<!--/ コンテンツ表示画面 -->
+
+
+
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- JQuery -->
+
+
+<!--** 以下Firebase **-->
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+    import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved }
+        from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.8.1/firebase-database.min.js";
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      
+      authDomain: "firebesa-demo.firebaseapp.com",
+      projectId: "firebesa-demo",
+      storageBucket: "firebesa-demo.appspot.com",
+      messagingSenderId: "291312121031",
+      appId: "1:291312121031:web:8537b9a61ff124ab14bae2"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    const db = getDatabase(app);
+    const dbRef = ref(db, 'chat');
+
+    $('#send').on('click', function(){
+        const msg  = {
+            uname: $('#uname').val(),
+            text: $('#text').val()
+        }
+        const newPostRef = push(dbRef);
+        set(newPostRef, msg);
+    });
+
+    onChildAdded(dbRef, function(data){
+        const msg = data.val();
+        const key = data.key;
+        let h = "<p>";
+        h += "👨"
+        h += msg.uname;
+        h += "：";
+        h += msg.text;
+        h += "</p>";
+        $('#message_r').append(h);
+        $("#message_r").css({
+            "position" : "relative",
+            "width" : "300px",
+            "background": "#5ae628",
+            "padding" : "20px",
+            "text-align" : "left",
+            "color" : "#333333",
+            "font-size" : "14px",
+            "font-weight" : "bold",
+            "border-radius" : "15px",
+            "-webkit-border-radius" : "15px",
+            "-moz-border-radius" : "15px",
+            "margin-left" : "1px"
+        });
+
+
+    });
+
+    $('#text').on('keydown', function(e){
+        if(e.keyCode == 13) {
+            const msg  = {
+            uname: $('#uname').val(),
+            text: $('#text').val()
+            }
+        const newPostRef = push(dbRef);
+        set(newPostRef, msg);
+        }
+    });
+
+    $("#delete").on("click", function(){
+        var list_element = document.getElementById("message_r");
+        list_element.remove();
+    });
+
+// 個別のメッセージ削除
+onChildAdded(dbRef, function(data){
+    const msg = data.val();
+    const key = data.key;
+    const h =`<p id="${key}"class="mes"${msg.uname}: ${meg.text}</p>`;
+        // id="${key} class=messages"を追記
+        $('#output').append(h);
+});
+
+$('#output').on('click', '.mes', function(){
+    alert('クリックされた！');
+});
+
+$('#output').on('click', '.mes', function(){
+    // 1. pタグのid(=firebaseのキー情報)を取得
+    // ⇨ヒント：クリックされた要素自体を取得するのは$(this)と書く
+
+    // 2. キー情報を基にfirebaseのデータを削除する
+    // ⇨ヒント：一番最初firebaseの便利ツールとしてremoveというメソッドを使います
+    // 例えばchatの中にあるaaaaというキーのデータを削除したい場合、こんなふうに書きます
+    // remove(ref(db, `chat/aaaa`))
+
+})
+
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

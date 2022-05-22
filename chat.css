@@ -1,0 +1,130 @@
+#uname {
+    width: 200px;
+    background-color: #fff;
+}
+
+#text {
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    font-size: 16px;
+    width: 300px;
+    height: 75px;
+    background-color: #fff;
+    border: solid 2px gray;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px; 
+}
+
+#output {
+    border-color: black;
+    background-color:#7494C0;
+    width: 400px;
+    font-size: 15px;
+    height: 450px;
+    margin-bottom: 1px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#top {
+    background-color:rgb(2, 2, 53);
+    width: 400px;
+    text-align: center;
+    margin-bottom: 1px;
+    color: aliceblue;
+    padding: 1px;
+}
+
+#under {
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    color: #5d627b;
+    background: white;
+    border-top: solid 5px #5d627b;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
+    width: 368px;
+    margin-top: 1px;
+    background-color: #ddd;
+}
+
+/* 自分の吹き出し */
+#chart-right {
+    margin-right: 25px;
+    background: #A4E496;
+}
+
+/* 相手の吹き出し */
+#chart-left {
+    margin-left: 25px;
+    background: #fff;
+}
+
+#message {
+    position:relative;
+    width:300px;
+    background:#fff;
+    padding:20px;
+    text-align:left;
+    color:#333333;
+    font-size:14px;
+    font-weight:bold;
+    border-radius:15px;
+    -webkit-border-radius:15px;
+    -moz-border-radius:15px;
+    margin-left: 1px;
+}
+
+#message::after{
+    border: solid transparent;
+    content:'';
+    height:0;
+    width:0;
+    pointer-events:none;
+    position:absolute;
+    border-color: rgba(90, 230, 40, 0);
+    border-top-width:10px;
+    border-bottom-width:10px;
+    border-left-width:30px;
+    border-right-width:30px;
+    margin-top: -10px;
+    right:100%;
+    top:50%;
+}
+
+main {
+    margin-left: 100px;
+    margin-top: 50px;
+}
+
+#message_rr {
+    position:relative;
+    width:300px;
+    background:#5ae628;
+    padding:20px;
+    text-align:left;
+    color:#333333;
+    font-size:14px;
+    font-weight:bold;
+    border-radius:15px;
+    -webkit-border-radius:15px;
+    -moz-border-radius:15px;
+    margin-left: 1px;
+}
+
+#message_rr::after{
+    border: solid transparent;
+    content:'';
+    height:0;
+    width:0;
+    pointer-events:none;
+    position:absolute;
+    border-color: rgba(90, 230, 40, 0);
+    border-top-width:10px;
+    border-bottom-width:10px;
+    border-left-width:30px;
+    border-right-width:30px;
+    margin-top: -10px;
+    right:100%;
+    top:50%;
+}
